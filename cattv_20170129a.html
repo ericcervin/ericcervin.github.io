@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20170129a</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+
+var img_list = []
+
+function preload(){
+    img_list.push(loadImage("./media/green_l00.jpg"))
+    img_list.push(loadImage("./media/green_l01.jpg"))
+    img_list.push(loadImage("./media/green_l02.jpg"))
+    img_list.push(loadImage("./media/green_l03.jpg"))
+    img_list.push(loadImage("./media/green_l04.jpg"))
+    img_list.push(loadImage("./media/green_l05.jpg"))
+    img_list.push(loadImage("./media/green_l06.jpg"))
+    img_list.push(loadImage("./media/green_l07.jpg"))
+    img_list.push(loadImage("./media/green_l08.jpg"))
+    img_list.push(loadImage("./media/green_l09.jpg"))
+    img_list.push(loadImage("./media/green_l10.jpg"))
+    img_list.push(loadImage("./media/green_l11.jpg"))
+}
+
+function setup(){
+    createCanvas(540,960);
+    textSize(90);
+    frameRate(12);
+    fill(255);
+
+}
+function draw(){
+    image(img_list[frameCount % 12],0,0,540,960);
+    if (frameCount > 12){text('kie',190,270);}
+    if (frameCount > 24){text('hap',60,80);}
+    if (frameCount > 36){text('day',220,180);}
+    if (frameCount > 48){text('fran',30,270);}
+    if (frameCount > 60){text('py',220,80);}
+    if (frameCount > 72) {text('birth',15,180);}
+}
+
+  </script>
+  </body>
+  
+</html>
+ 
