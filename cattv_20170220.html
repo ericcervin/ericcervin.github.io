@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20170220</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+
+  var back_img, front_img, x, y;
+  
+function preload(){
+  front_img = loadImage("./media/lil_red.png");
+  back_img = loadImage("./media/green_l_blank.jpg");
+}
+
+function setup(){
+  createCanvas(500,500);
+  image(back_img,0,0,500,500);
+  x = random(150); 
+  y = random(270);
+  frameRate(24);
+}
+
+function draw(){
+  if ((frameCount % 24) == 0){
+       x = random(400); y = random(400)
+       image(back_img,0,0,500,500)
+    }
+    image(front_img, x + random(81), y + random(81),30,30)
+
+}
+
+  </script>
+  </body>
+  
+</html>
+ 
