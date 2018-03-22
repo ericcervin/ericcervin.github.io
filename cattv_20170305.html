@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20170305</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+  text_array = ["j","a","s","p","e","r"];    //text that will be used to compose each blossom. 
+                                             //please use a factor of 36 texts (1,2,3,4,6,9,12,18,36)   #captainObvious
+  display_width = 1200;                       //width of the display window
+  display_height = 600;                       //height of the display window
+  export_frames = 0;                          //number of frames to export to sketch folder as pngs
+
+  bloom_list = [];
+  bloom_spread = (36/text_array.length);
+  
+  function Bloom(temp_x,temp_y,age){
+        max_blossom_spread_x = 80;            //maximum width of blossom in pixels
+        max_blossom_spread_y = 80;            //maximum height of blossom in pixels
+        
+        max_text_size = 40;                   //maximum size for char that is each "petal". 
+                                             //No minimum.
+                                             
+        min_text_lightness = 55;              //minimum lightness for char that is each "petal".
+        max_text_lightness = 200;             //maximum lightness for char that is each "petal". 
+                                             //0 = pure black. 255 = pure white
+        
+        this.x = temp_x;
+        this.y = temp_y;
+        this.age = age;
+        this.child_x = [];
+        this.child_y = [];
+        this.child_ts = [];
+        this.child_fill = [];
+        for (var i = 0; i < 36; i++){
+            this.child_x.push(this.x - (max_blossom_spread_x/2) + random(max_blossom_spread_x));
+            this.child_y.push(this.y - (max_blossom_spread_y/2) + random(max_blossom_spread_y));
+            this.child_ts.push(random(max_text_size));
+            this.child_fill.push(random(min_text_lightness,max_text_lightness));
+            }
+        
+
+        this.blossom = function(txt){
+         for (var i = 0; i < this.age + 1; i++){            
+            if (mouseIsPressed){
+                fill(255 - this.child_fill[i]);
+            } else {
+                fill(this.child_fill[i]);
+			}
+			textSize(this.child_ts[i]);
+            text(txt,this.child_x[i],this.child_y[i]);
+         }
+        }
+  }  
+
+  
+  function setup(){
+    createCanvas(display_width,display_height);    
+    frameRate(24);
+    for (var i = 0; i < 36 ;i++){
+        if ((i % bloom_spread) == 0){
+            bloom_list.push(new Bloom(100,100,i));
+        } else {
+            bloom_list.push("_")
+        }
+	 }
+}
+
+  function draw(){ 
+    if (mouseIsPressed){
+        background(0);
+    } else {
+        background(255);
+    }
+
+    for (var i = 0; i < 36 ;i++){
+        if ((i % bloom_spread) == 0){
+            bloom_list[i].blossom(text_array[i/bloom_spread]);
+            bloom_list[i].age += 1;
+            if (bloom_list[i].age > 35){
+                bloom_list[i] = new Bloom(random(width),random(height),0);
+				}
+			}
+	}
+
+
+}
+  </script>
+  </body>
+  
+</html>
+ 
