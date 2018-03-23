@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20170317</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+  
+  var planet_count = 9;                            // number of planets in system
+
+  var display_width = 1200;                          //width of the display window
+  var display_height = 600;                         //height of the display window
+  var planet_system = [];
+  
+  function planetoid (temp_x,temp_y,temp_o_rate,temp_p_diameter){
+      this.x = temp_x;
+      this.y = temp_y;
+      this.o_rate = temp_o_rate;
+      this.p_diameter = temp_p_diameter;
+      this.o_diameter = this.p_diameter + (this.p_diameter * random(1,4));
+      
+      this.render = function() {
+          noFill();
+          stroke(random(100,255));
+          ellipse(this.x,this.y,this.o_diameter,this.o_diameter);
+        
+          fill(random(100,255),random(100,255));
+          ellipse(this.x,this.y,this.p_diameter,this.p_diameter);
+          ht = this.y + (sin(radians(frameCount * this.o_rate)) * (this.o_diameter/2));
+          wt = this.x + (cos(radians(frameCount * this.o_rate)) * (this.o_diameter/2));
+          fill(random(100,255),random(100,255));
+          ellipse(wt,ht,10,10);
+      }
+  }
+
+  function populate_system(){
+    planet_system = [];
+     for (var i = 0; i < planet_count; i++){
+        planet_system.push(new planetoid(random(width),random(height),random(4,24),random(15,30)));
+    }
+  }
+
+  function setup(){
+    frameRate(24);
+    createCanvas(display_width,display_height);
+    populate_system();
+  }
+  
+  function draw(){
+    background(0);
+    
+    for (var i = 0; i < planet_count; i++){
+        planet_system[i].render();
+    }
+    if ((frameCount % 24) == 0){
+		populate_system();
+    }    
+  }
+  </script>
+  </body>
+  
+</html>
+ 
