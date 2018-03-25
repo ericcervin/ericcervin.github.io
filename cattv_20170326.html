@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20170326</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+//based on Parameterize Waves
+//from Form+Code in Design, Art, and Architecture by Reas, etc.
+
+display_width = 1200;            //width of display in pixels
+display_height = 600;           //height of display in pixels
+frame_rate = 12;                //frames/second
+perc_rev_bar = 8;               //percentage of bars that are reversed
+perc_rev_frame = 8;             //percentage of frames that are reversed
+
+brickWidth = 20;
+brickHeight = 7;
+cols = display_width / 30;
+rows = display_height / 16;
+columnOffset = 30;
+rowOffset = 15;
+rotationIncrement = 0.15;
+
+function setup(){
+    createCanvas(display_width,display_height);
+    stroke(0);
+    frameRate(frame_rate);
+}
+
+function draw(){
+    rnd = random(0,1.0);
+    if (rnd >= ((1/100.0)*perc_rev_frame)){
+        fore_c = 0;
+        back_c = 255;
+    } else {
+        fore_c = 255;
+        back_c = 0;
+    }
+    background(back_c);
+    translate(30,30);
+    for (var i = 0; i < cols; i++){
+        push();
+        translate(i * columnOffset, 0);
+        r = random(-QUARTER_PI,QUARTER_PI);
+        dir = 1;
+        
+		for (var j = 0; j < rows; j++){
+            push();
+            translate(0,rowOffset * j);
+            rotate(r);
+            rnd = random(0,1.0);
+            if (rnd >= ((1/100.0)*perc_rev_bar)){
+                fill(back_c);  
+            } else {
+                fill(fore_c);
+			}
+			
+            rect(-brickWidth/2,-brickHeight/2,brickWidth,brickHeight);
+            
+			pop();
+            r += dir * rotationIncrement;
+            if ((r > QUARTER_PI) || (r < -QUARTER_PI)){
+                dir *= -1;
+            }
+             
+        }
+	
+	         pop();
+	}
+}
+  </script>
+  </body>
+  
+</html>
+ 
