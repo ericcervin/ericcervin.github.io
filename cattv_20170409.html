@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20170409</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+//based on Simulate Particles
+//from Form+Code in Design, Art, and Architecture by Reas, etc.
+
+display_width = 1200;             //width of display in pixels
+display_height = 600;            //height of display in pixels
+particle_count = 250;            //number of lines in the drawing
+life_span = 65;                  //number of frames before rebirth (~60 frames/second)
+
+particles = [];
+
+function setup(){
+    createCanvas(display_width,display_height);
+    smooth();
+    strokeWeight(2);
+    birth();
+}
+
+function draw(){
+    for (var i = 0; i < particles.length; i++){
+           particles[i].update();
+           particles[i].draaw();
+    }
+	
+    if ((frameCount % life_span) == 0){ birth();}
+}
+
+function birth(){
+    background(255);
+    particles = [];
+    start_x = random(width * 0.1,width * 0.9);
+    start_y = random(height * 0.1,height * 0.9);
+    for (var i = 0; i < particle_count; i++){
+        particles.push(new Particle(createVector(start_x,start_y)))
+    }
+}
+function Particle(l){
+    this.loc = createVector();
+    this.vel = createVector();
+    this.acc = createVector();
+    
+        
+     this.randmin = -HALF_PI;
+     this.randmax = 0;
+        
+     this.counter = 0;
+        
+     this.r = random(0,TWO_PI)
+     this.x = cos(this.r);
+     this.y = sin(this.r);
+     this.acc = createVector(this.x/15,this.y/15);
+        
+     this.q = random(0,1);
+     this.r= random(this.randmin,this.randmax);
+     this.x = cos(this.r) * this.q;
+     this.y = sin(this.r) * this.q;
+     this.vel = createVector(this.x,this.y);
+     this.loc = l;
+    
+    //update location
+    this.update = function(){
+        this.vel.add(this.acc);
+        this.loc.add(this.vel);
+    }
+	
+    //draw particle
+    this.draaw = function(){
+        stroke(0,100);
+        point(this.loc.x,this.loc.y);
+    }
+}
+  </script>
+  </body>
+  
+</html>
+ 
