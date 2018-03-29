@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20171120</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+//made while translating pg159 
+//from Getting Started With Processing" 2nd ed.
+
+var buglist = [];
+
+function JitterBug (temp_x, temp_y, temp_diameter){
+  this.x = temp_x;
+  this.y = temp_y;
+  this.diameter = temp_diameter;
+  this.speed = 2.5;
+
+  this.move = function(){
+    this.x += ((-1 * this.speed) + (2 * random(this.speed)));
+    this.y += ((-1 * this.speed) + (2 * random(this.speed)));
+  }
+  
+  this.display = function(){
+    ellipse(this.x, this.y, this.diameter, this.diameter);
+  }
+}
+
+function setup(){
+  createCanvas(1200,600);
+  background(0);
+  fill(255,32);
+  for (var i = 0; i < 33; i++){
+    buglist.push(new JitterBug(random(width),random(height), i));
+  }
+}
+
+function draw(){
+   for (var i = 0; i < buglist.length; i++){
+     buglist[i].move();
+     buglist[i].display();
+   } 
+}                                
+
+
+  
+
+    
+
+
+
+
+
+  </script>
+  </body>
+  
+</html>
+ 
