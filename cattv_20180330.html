@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20180330</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <p>It's a thaumatrope. Click on it to change the speed</p>
+  <script type="text/javascript">
+imgs = [];
+rates = [1,6,12,24,60];
+
+frame_counter = 0;
+rate_counter = 0;
+
+function preload(){
+  imgs[0] = loadImage("./media/dog.jpg");
+  imgs[1] = loadImage("./media/bird.jpg");
+}
+
+function setup(){
+  createCanvas(330,330);
+  frameRate(rates[rate_counter]); 
+}
+
+function draw(){  
+  background(0);
+  image(imgs[frame_counter],0,0,330,330); 
+  frame_counter += 1;
+  if (frame_counter > imgs.length - 1) {
+    frame_counter = 0;
+  }
+  fill(255);
+  text(rates[rate_counter] + " frames/second",5,325);
+}
+
+function mouseClicked(){
+  rate_counter += 1;
+  if (rate_counter > (rates.length - 1)){
+    rate_counter = 0;
+  }
+  frameRate(rates[rate_counter]); 
+}
+
+
+
+  </script>
+  </body>
+  
+</html>
+ 
