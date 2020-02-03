@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cattv_20200202</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="./libraries/p5.min.js"></script>
+  </head>
+  <body>
+  <script type="text/javascript">
+  //based on ex. 24-12 in Processing: A Programming Handbook
+  display_width = 1200;                        //width of the display window
+  display_height = 600;                       //height of the display window
+
+
+function drawX(gray, weight, x, y, size){
+          strokeWeight(weight);
+          stroke(gray);
+          line(x,y,x + size,y+size);
+          line(x + size,y,x ,y+size);
+         }
+
+function setup(){
+    createCanvas(display_width,display_height);    
+    frameRate(4);
+    }
+
+function draw(){
+    background(204);
+    for (var i = 0; i < 12; i++){
+        grayValue = random(255);
+        thickness = random(30);
+        x = random(50 + width) - 50;
+        y = random(50 + height) - 50;
+      drawX( grayValue, thickness, x, y, 100)
+    }
+}
+  </script>
+  </body>
+  
+</html>
+ 
